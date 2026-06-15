@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASK Assessoria de Corrida | Em Busca do Seu Limite</title>
+    <meta name="description" content="A ASK Assessoria de Corrida oferece treinos presenciais em Teresina-PI, planilhas online personalizadas e preparação completa para provas de 5k, 10k, meia e maratona. Descubra seu limite!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,800;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF5500;
+            --primary-rgb: 255, 85, 0;
+            --secondary: #FFDF00;
+            --dark: #0A0A0B;
+            --dark-card: #141416;
+            --dark-hover: #1E1E22;
+            --light: #F4F4F6;
+            --gray-text: #9A9A8A;
+            --white: #FFFFFF;
+            --gradient-orange: linear-gradient(135deg, #FF7700 0%, #FF3300 100%);
+            --gradient-gold: linear-gradient(135deg, #FFDF00 0%, #D4AF37 100%);
+            --shadow-orange: 0 8px 32px rgba(255, 85, 0, 0.25);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .italic-title {
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        .highlight-text {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Layout Utilities */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 38px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--gray-text);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-orange);
+            color: var(--white);
+            box-shadow: var(--shadow-orange);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 85, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(255, 85, 0, 0.05);
+            transform: translateY(-3px);
+        }
+
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 85, 0, 0.15);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        /* Logo Draw (Spark / runner style) */
+        .logo-symbol {
+            width: 38px;
+            height: 38px;
+            background: var(--gradient-orange);
+            clip-path: polygon(40% 0%, 100% 0%, 60% 100%, 0% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav ul a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        nav ul a:hover, nav ul a.active {
+            color: var(--white);
+            text-shadow: 0 0 10px rgba(255, 85, 0, 0.5);
+        }
+
+        .nav-btn {
+            padding: 10px 24px;
+            font-size: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(255, 85, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(255, 223, 0, 0.05) 0%, transparent 50%),
+                var(--dark);
+            z-index: 1;
+        }
+
+        /* Grid Pattern overlay */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 780px;
+        }
+
+        .hero-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 85, 0, 0.1);
+            border: 1px solid rgba(255, 85, 0, 0.25);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-tagline::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 84px);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2.5vw, 19px);
+            color: var(--gray-text);
+            margin-bottom: 40px;
+            max-width: 620px;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Abstract Runner Image in Background */
+        .hero-graphic {
+            position: absolute;
+            right: -5%;
+            bottom: 5%;
+            width: 50%;
+            max-width: 600px;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255, 85, 0, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Floating Stats Card */
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-card h3 {
+            font-size: clamp(28px, 4vw, 40px);
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-frame {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 440px;
+        }
+
+        /* Modern Abstract Logo Badge */
+        .logo-badge {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 85, 0, 0.15), rgba(255, 223, 0, 0.05));
+            border: 2px solid var(--primary);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(255, 85, 0, 0.2);
+        }
+
+        .logo-badge-runner {
+            font-size: 72px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        .logo-badge h3 {
+            font-size: 32px;
+            font-style: italic;
+            font-weight: 900;
+            color: var(--white);
+            margin-top: 10px;
+        }
+
+        .logo-badge p {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .about-content p {
+            color: var(--gray-text);
+            font-size: 16px;
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .highlight-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .highlight-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 85, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .highlight-text-box h4 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .highlight-text-box p {
+            font-size: 13px;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--dark-card);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-orange);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 85, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 85, 0, 0.08);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Coaches Section */
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .coach-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .coach-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 85, 0, 0.25);
+        }
+
+        .coach-avatar {
+            height: 280px;
+            background: linear-gradient(185deg, #242429 0%, #0A0A0B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+        }
+
+        .coach-avatar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--dark-card) 0%, transparent 60%);
+        }
+
+        .coach-info {
+            padding: 24px;
+        }
+
+        .coach-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .coach-info p {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .coach-bio {
+            font-size: 13px;
+            color: var(--gray-text) !important;
+            margin: 0;
+        }
+
+        /* Plans Section */
+        .plans {
+            background-color: var(--dark-card);
+            position: relative;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 48px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .plan-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(255, 85, 0, 0.1);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .plan-header h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .plan-header .plan-desc {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin-bottom: 24px;
+        }
+
+        .plan-price {
+            font-size: 46px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .plan-price span {
+            font-size: 16px;
+            color: var(--gray-text);
+            font-weight: 400;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .plan-features li {
+            font-size: 14px;
+            color: var(--light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        /* Results / Real Achievements Section */
+        .results {
+            background-color: var(--dark);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .result-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .result-athlete {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .athlete-pic {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--gradient-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .athlete-meta h4 {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .athlete-meta span {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .result-achievement {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            font-size: 14px;
+            color: var(--light);
+            margin-bottom: 20px;
+        }
+
+        .result-quote {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: var(--dark-card);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #18181A 0%, #0A0A0B 100%);
+            transition: var(--transition);
+        }
+
+        .gallery-placeholder span {
+            font-size: 40px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 85, 0, 0.3));
+        }
+
+        .gallery-placeholder p {
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-text);
+        }
+
+        .gallery-item:hover .gallery-placeholder {
+            transform: scale(1.05);
+            background: rgba(255, 85, 0, 0.1);
+        }
+
+        /* Location & Schedule Section */
+        .location {
+            background-color: var(--dark-card);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .location-info h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .location-details {
+            margin-bottom: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .detail-icon {
+            font-size: 22px;
+            color: var(--primary);
+            margin-top: 2px;
+        }
+
+        .detail-text h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .detail-text p {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        .schedule-box {
+            background: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .schedule-box h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .schedule-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .schedule-row span:first-child {
+            font-weight: 600;
+        }
+
+        .schedule-row span:last-child {
+            color: var(--primary);
+        }
+
+        .map-mockup {
+            background: linear-gradient(135deg, #1A1A1E 0%, #111113 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            height: 400px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-pin {
+            font-size: 50px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Floating CTA WhatsApp */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--white);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 80px 0 40px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin: 20px 0;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--gray-text);
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background-color: var(--white);
+            transition: var(--transition);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .about-grid, .location-grid, .results-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .about-frame {
+                min-height: 320px;
+            }
+            .hero-graphic {
+                display: none;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                display: none;
+                padding: 30px 24px;
+            }
+            nav.active {
+                display: block;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .nav-btn {
+                display: none;
+            }
+            .section-padding {
+                padding: 80px 0;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-symbol">A</div>
+                <div class="logo-text">ASK<span>.</span></div>
+            </a>
+            
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#planos" class="nav-link">Planos</a></li>
+                    <li><a href="#resultados" class="nav-link">Atletas</a></li>
+                    <li><a href="#localizacao" class="nav-link">Localização</a></li>
+                </ul>
+            </nav>
+            
+            <a href="https://wa.me/5586999565861?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20experimental%20na%20ASK%20Assessoria!" target="_blank" class="btn btn-primary nav-btn">Aula Experimental</a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-graphic"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tagline">Assessoria Esportiva Premium</div>
+                <h1 class="italic-title">Em Busca do Seu <span class="highlight-text">Limite!</span></h1>
+                <p>Reprograme seu condicionamento físico com treinos presenciais em Teresina e planilhas online sob medida para sua rotina.</p>
+                
+                <div class="hero-actions">
+                    <a href="#planos" class="btn btn-primary">Ver Planos e Preços</a>
+                    <a href="https://wa.me/5586999565861?text=Olá!%20Quero%20agendar%20uma%20aula%20experimental." target="_blank" class="btn btn-secondary">Agendar Aula Experimental</a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <h3>8+</h3>
+                        <p>Anos no mercado</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>500+</h3>
+                        <p>Atletas treinados</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>98%</h3>
+                        <p>Aprovação de alunos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <div class="about-frame">
+                        <div class="logo-badge">
+                            <div class="logo-badge-runner">🏃‍♂️</div>
+                            <h3>ASK</h3>
+                            <p>Assessoria Esportiva</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <h2 class="italic-title">Nossa História & <span class="highlight-text">Metodologia</span></h2>
+                    <p>A ASK Assessoria de Corrida é referência no ramo esportivo em Teresina. Acreditamos que a corrida é o caminho ideal para a saúde, bem-estar e alta performance. Oferecemos acompanhamento individualizado para que cada atleta atinja seus objetivos com segurança.</p>
+                    <p>Seja você um iniciante buscando os primeiros 5k ou um maratonista buscando diminuir seu tempo, nossa equipe tem o protocolo científico e a vibe acolhedora necessária para te guiar.</p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">⏱️</div>
+                            <div class="highlight-text-box">
+                                <h4>Foco no Resultado</h4>
+                                <p>Planilhas atualizadas semanalmente via aplicativo de treino.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">🔥</div>
+                            <div class="highlight-text-box">
+                                <h4>Vibe & Adrenalina</h4>
+                                <p>Grupos focados e motivados, com suporte em provas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="section-padding services">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que <span class="highlight-text">Oferecemos</span></h2>
+                <p>Estrutura e serviços completos desenvolvidos para levar sua corrida ao próximo nível.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏃‍♂️</div>
+                    <h3>Treinos Presenciais</h3>
+                    <p>Treinos presenciais dinâmicos para aprimorar sua postura e técnica com a nossa equipe de treinadores.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Planilhas Online</h3>
+                    <p>Treinos personalizados entregues e ajustados pelo aplicativo, adaptados 100% à sua agenda diária.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏅</div>
+                    <h3>Preparação para Provas</h3>
+                    <p>Planejamento completo e periodização de carga para distâncias de 5k, 10k, Meia e Maratona.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Corrida em Grupo</h3>
+                    <p>Pelotões organizados por ritmo para motivar e estimular o ritmo ideal de treino.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Avaliação Física</h3>
+                    <p>Acompanhamento e bioimpedância contínuos para aferir sua evolução corporal.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💪</div>
+                    <h3>Personal Trainer</h3>
+                    <p>Prescrição complementar de força e musculação específica para prevenção de lesões na corrida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coaches Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Treinadores <span class="highlight-text">ASK</span></h2>
+                <p>Nossa equipe de especialistas altamente qualificados para acompanhar seus passos.</p>
+            </div>
+            
+            <div class="coaches-grid">
+                <div class="coach-card">
+                    <div class="coach-avatar">🏃‍♂️</div>
+                    <div class="coach-info">
+                        <h3>Prof. Alisson Sousa</h3>
+                        <p>Treinador Chefe</p>
+                        <p class="coach-bio">Especialista em Fisiologia do Exercício e Biomecânica da Corrida.</p>
+                    </div>
+                </div>
+                <div class="coach-card">
+                    <div class="coach-avatar">🏃‍♀️</div>
+                    <div class="coach-info">
+                        <h3>Prof. Mariana Costa</h3>
+                        <p>Treinadora de Performance</p>
+                        <p class="coach-bio">Preparadora física com foco em periodização de longa distância.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section id="planos" class="section-padding plans">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planos & <span class="highlight-text">Preços</span></h2>
+                <p>Escolha o plano ideal e faça parte da equipe esportiva mais dinâmica de Teresina.</p>
+            </div>
+            
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Mensal</h3>
+                        <p class="plan-desc">Para quem busca flexibilidade de treino.</p>
+                        <div class="plan-price">R$ 149<span>/mês</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Planilha pelo aplicativo oficial</li>
+                        <li>Feedback e ajustes quinzenais</li>
+                        <li>Acesso a 2 treinos presenciais/semana</li>
+                        <li>Suporte via WhatsApp</li>
+                    </ul>
+                    <a href="https://wa.me/5586999565861?text=Olá,%20quero%20assinar%20o%20Plano%20Mensal" target="_blank" class="btn btn-secondary">Assinar Plano</a>
+                </div>
+                
+                <div class="plan-card featured">
+                    <div class="plan-badge">Melhor Escolha</div>
+                    <div class="plan-header">
+                        <h3>Semestral</h3>
+                        <p class="plan-desc">Fidelidade e foco no médio prazo.</p>
+                        <div class="plan-price">R$ 119<span>/mês</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Planilha personalizada com ajustes semanais</li>
+                        <li>Acesso total a todos os treinos presenciais</li>
+                        <li>Suporte prioritário via WhatsApp</li>
+                        <li>Análise de biomecânica de corrida</li>
+                        <li>Kit de boas-vindas ASK incluso</li>
+                    </ul>
+                    <a href="https://wa.me/5586999565861?text=Olá,%20quero%20assinar%20o%20Plano%20Semestral" target="_blank" class="btn btn-primary">Garantir Plano</a>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Anual</h3>
+                        <p class="plan-desc">Compromisso total com o estilo de vida.</p>
+                        <div class="plan-price">R$ 99<span>/mês</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Tudo do Plano Semestral</li>
+                        <li>Planejamento macro para maratonas</li>
+                        <li>Acompanhamento presencial em provas</li>
+                        <li>Camiseta oficial de ciclismo/corrida ASK</li>
+                        <li>Desconto com parceiros (Nutri/Fisio)</li>
+                    </ul>
+                    <a href="https://wa.me/5586999565861?text=Olá,%20quero%20assinar%20o%20Plano%20Anual" target="_blank" class="btn btn-secondary">Assinar Plano</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="resultados" class="section-padding results">
+        <div class="container">
+            <div class="section-header">
+                <h2>Resultados <span class="highlight-text">Reais</span></h2>
+                <p>Conquistas e pódios dos atletas que decidiram ir além de seus limites.</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-athlete">
+                        <div class="athlete-pic">LT</div>
+                        <div class="athlete-meta">
+                            <h4>Leo Torres</h4>
+                            <span>Maratonista ASK</span>
+                        </div>
+                    </div>
+                    <div class="result-achievement">
+                        🏁 <strong>Atleta Confirmado</strong> na Maratona do Rio 2026 - Distância de 42 km.
+                    </div>
+                    <p class="result-quote">"A preparação com as planilhas semanais e os ajustes de volume do Alisson foram fundamentais para que eu encarasse o desafio dos 42km com total confiança."</p>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-athlete">
+                        <div class="athlete-pic">P</div>
+                        <div class="athlete-meta">
+                            <h4>Paula</h4>
+                            <span>Velocista ASK</span>
+                        </div>
+                    </div>
+                    <div class="result-achievement">
+                        🏆 <strong>1º Lugar Geral</strong> na categoria de 30-39 anos na II Corrida do Trabalhador Timonense.
+                    </div>
+                    <p class="result-quote">"Subir no lugar mais alto do pódio foi incrível! O trabalho de musculação preventiva e os tiros orientados me deram a explosão que eu precisava."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galeria de <span class="highlight-text">Fotos</span></h2>
+                <p>Registros dos nossos treinos presenciais e provas disputadas.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>👟</span>
+                        <p>Treino na Avenida</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>⏱️</span>
+                        <p>Tiro Monitorado</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🏆</span>
+                        <p>Premiações</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🏕️</span>
+                        <p>Tenda da Prova</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Schedule Section -->
+    <section id="localizacao" class="section-padding location">
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-info">
+                    <h2 class="italic-title">Nosso <span class="highlight-text">Ponto de Encontro</span></h2>
+                    <p>Realizamos nossos treinos presenciais nos melhores pontos da cidade, oferecendo hidratação e suporte total da equipe.</p>
+                    
+                    <div class="location-details">
+                        <div class="detail-row">
+                            <div class="detail-icon">📍</div>
+                            <div class="detail-text">
+                                <h4>Endereço Principal</h4>
+                                <p>Av. Mar. Castelo Branco - Centro (Sul), Teresina - PI, 64000-590, Brasil</p>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-icon">📞</div>
+                            <div class="detail-text">
+                                <h4>Telefone de Contato</h4>
+                                <p>(86) 99956-5861</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-box">
+                        <h4>Horários dos Treinos Presenciais</h4>
+                        <div class="schedule-row">
+                            <span>Terça & Quinta</span>
+                            <span>06:00 - 07:30 | 18:30 - 20:00</span>
+                        </div>
+                        <div class="schedule-row">
+                            <span>Sábado (Treino Longo)</span>
+                            <span>05:30 - 08:30</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-mockup">
+                    <div class="map-pin">📍</div>
+                    <div style="font-weight: 700; margin-top: 15px; font-family: 'Montserrat';">AV. MAR. CASTELO BRANCO</div>
+                    <div style="font-size: 13px; color: var(--gray-text);">Teresina, Piauí</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp button -->
+    <a href="https://wa.me/5586999565861?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20ASK%20Assessoria%20de%20Corrida!" class="wa-float" target="_blank" rel="noopener">💬</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-symbol">A</div>
+                        <div class="logo-text">ASK<span>.</span></div>
+                    </a>
+                    <p>Sua assessoria esportiva completa. Levando você além das marcas, superando barreiras e correndo sempre em busca do seu limite.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/ask_assessoria" target="_blank" class="social-link" aria-label="Instagram">📸</a>
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#planos">Planos & Preços</a></li>
+                        <li><a href="#resultados">Atletas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#servicos">Treinos Presenciais</a></li>
+                        <li><a href="#servicos">Planilhas Online</a></li>
+                        <li><a href="#servicos">Preparação de Provas</a></li>
+                        <li><a href="#servicos">Musculação</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Fale Conosco</h4>
+                    <ul>
+                        <li><a href="tel:5586999565861">Ligar (86) 99956-5861</a></li>
+                        <li><a href="https://instagram.com/ask_assessoria" target="_blank">@ask_assessoria</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASK Assessoria Esportiva. Todos os direitos reservados.</p>
+                <p>Teresina - PI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header scroll script
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll Animation Engine
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateSelectors = [
+                '.about-visual', '.about-content', 
+                '.service-card', '.coach-card', 
+                '.plan-card', '.result-card', 
+                '.gallery-item', '.location-info', '.map-mockup'
+            ];
+            
+            const elementsToAnimate = document.querySelectorAll(animateSelectors.join(', '));
+            
+            elementsToAnimate.forEach((el, index) => {
+                el.classList.add('scroll-animate');
+                // Apply a slight stagger effect based on the element's position in the DOM
+                el.style.transitionDelay = `${(index % 4) * 0.1}s`;
+            });
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            elementsToAnimate.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
+</body>
+</html>

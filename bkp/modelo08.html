@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASK Assessoria de Corrida - Em Busca do Seu Limite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #FF6600;
+            --primary-hover: #E55C00;
+            --dark: #111111;
+            --dark-card: #1A1A1A;
+            --light: #FFFFFF;
+            --gray-bg: #F8F9FA;
+            --gray-text: #A0A0A5;
+            --gold-gradient: linear-gradient(135deg, #FFDF00 0%, #D4AF37 100%);
+            --orange-gradient: linear-gradient(135deg, #FF8800 0%, #FF5500 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .italic-title {
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav ul a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: var(--light);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFDF00;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-text);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Decorative big logo badge simulation */
+        .badge-logo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5500, #FFCC00);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+            border: 8px solid var(--dark);
+        }
+
+        .badge-logo h2 {
+            font-size: 64px;
+            font-style: italic;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--light);
+            text-shadow: 3px 3px 0px var(--dark);
+        }
+
+        .badge-slogan {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--light);
+            background: var(--dark);
+            padding: 4px 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 5px;
+            background-color: var(--primary);
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 24px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-header h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .services-header p {
+            color: var(--gray-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: var(--gray-bg);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            align-items: stretch;
+        }
+
+        .price-card {
+            background-color: var(--light);
+            border-radius: 20px;
+            padding: 50px 40px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .price-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(255,102,0,0.08);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 30px;
+            text-transform: uppercase;
+        }
+
+        .price-header h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--dark);
+            margin: 20px 0;
+        }
+
+        .price-amount span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #777;
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .price-features li {
+            font-size: 15px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            color: #555;
+        }
+
+        .price-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 60px 0 30px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .footer-about h2 span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            color: var(--gray-text);
+            max-width: 400px;
+            font-size: 14px;
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: var(--gray-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero h1 {
+                font-size: 48px;
+            }
+            .price-card.featured {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* In a full project, add mobile menu burger */
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo-text">ASK<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">A ASK</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 12px;">Começar</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <p class="hero-tagline">ASK ASSESSORIA ESPORTIVA</p>
+                <h1 class="italic-title">Em Busca do Seu <span>Limite!</span></h1>
+                <p>Treinos personalizados, planilhas inteligentes e acompanhamento profissional para você evoluir na corrida com saúde e performance.</p>
+                <div class="hero-buttons">
+                    <a href="#planos" class="btn btn-primary">Quero Ser Aluno ASK</a>
+                    <a href="#sobre" class="btn btn-secondary">Conhecer Metodologia</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <div class="badge-logo">
+                        <h2>ASK</h2>
+                        <div class="badge-slogan">Em Busca do Seu Limite!</div>
+                    </div>
+                </div>
+                <div class="about-text reveal delay-1">
+                    <h2 class="section-title">Quem Somos Nós</h2>
+                    <p>A ASK Assessoria de Corrida nasceu com o propósito de transformar vidas através do esporte. Acreditamos que a corrida vai muito além de colocar um par de tênis; trata-se de disciplina, superação diária e comunidade.</p>
+                    <p>Nossa equipe conta com treinadores altamente qualificados que entendem a individualidade biológica de cada atleta. Se você está começando do zero absoluto ou buscando a sua melhor marca em uma maratona, a ASK desenha o caminho ideal para você chegar lá com segurança.</p>
+                    <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-primary" style="background-color: var(--dark);">Falar com um Treinador</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <h2>Nossos Serviços</h2>
+                <p>Uma estrutura completa montada para garantir a sua melhor performance e evolução constante no asfalto ou na pista.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal delay-1">
+                    <div class="service-icon">📱</div>
+                    <h3>Planilhas via App</h3>
+                    <p>Treinos planejados especificamente para a sua rotina e objetivos, entregues semanalmente através de um aplicativo dinâmico e intuitivo.</p>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-icon">🏃‍♂️</div>
+                    <h3>Treinos Presenciais</h3>
+                    <p>Encontros em pontos estratégicos para correção de postura, técnicas de corrida (educativos) e treinos de tiro monitorados.</p>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-icon">⛺</div>
+                    <h3>Estrutura em Provas</h3>
+                    <p>Tenda exclusiva da ASK nos principais eventos regionais e nacionais, oferecendo hidratação, frutas, guarda-volumes e apoio moral.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="planos" class="pricing">
+        <div class="container">
+            <div class="services-header reveal" style="color: var(--dark);">
+                <h2>Planos & Assinaturas</h2>
+                <p>Escolha o formato que melhor se adapta ao seu momento e venha fazer parte da equipe laranja.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Plano Mensal -->
+                <div class="price-card reveal delay-1">
+                    <div class="price-header">
+                        <h3>Plano Mensal</h3>
+                        <p>Flexibilidade total</p>
+                        <div class="price-amount">R$ 149<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Planilha de treinos via App</li>
+                        <li>Análise de feedback semanal</li>
+                        <li>Acesso aos treinos presenciais</li>
+                        <li>Suporte básico via WhatsApp</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero?text=Quero+o+plano+mensal" target="_blank" class="btn btn-secondary" style="border-color: var(--dark); color: var(--dark); text-align: center;">Assinar Agora</a>
+                </div>
+
+                <!-- Plano Semestral -->
+                <div class="price-card featured reveal delay-2">
+                    <span class="badge-popular">Mais Escolhido</span>
+                    <div class="price-header">
+                        <h3>Plano Semestral</h3>
+                        <p>Foco no médio prazo</p>
+                        <div class="price-amount">R$ 119<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Planilha de treinos premium</li>
+                        <li>Suporte prioritário do treinador</li>
+                        <li>Análise de vídeos de biomecânica</li>
+                        <li>Kit Aluno ASK incluso (Camiseta)</li>
+                        <li>Estrutura VIP em provas</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero?text=Quero+o+plano+semestral" target="_blank" class="btn btn-primary" style="text-align: center;">Assinar Semestral</a>
+                </div>
+
+                <!-- Plano Anual -->
+                <div class="price-card reveal delay-3">
+                    <div class="price-header">
+                        <h3>Plano Anual</h3>
+                        <p>Compromisso com o estilo de vida</p>
+                        <div class="price-amount">R$ 99<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Todos os benefícios Premium</li>
+                        <li>Planejamento anual de provas macro</li>
+                        <li>Descontos com parceiros (Nutri/Fisio)</li>
+                        <li>Duas camisetas exclusivas ASK</li>
+                        <li>Melhor custo-benefício do mercado</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero?text=Quero+o+plano+anual" target="_blank" class="btn btn-secondary" style="border-color: var(--dark); color: var(--dark); text-align: center;">Garantir Desconto</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="reveal">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <h2>ASK<span>.</span></h2>
+                <p>Sua assessoria esportiva completa. Levando você além das marcas, superando barreiras e correndo sempre em busca do seu limite.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contato & Redes</h4>
+                <ul>
+                    <li><a href="https://instagram.com" target="_blank">Instagram (@ask_assessoria)</a></li>
+                    <li><a href="https://wa.me/seu-numero" target="_blank">WhatsApp Suporte</a></li>
+                    <li><a href="#">Área do Aluno</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ASK Assessoria de Corrida. Todos os direitos reservados. Desenvolvido com Foco em Alta Conversão.</p>
+        </div>
+    </footer>
+
+    <!-- Intersection Observer Script for scroll animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(
+                entries,
+                observer
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>

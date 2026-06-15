@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASK Assessoria de Corrida - Em Busca do Seu Limite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #FF6600;
+            --primary-hover: #E55C00;
+            --dark: #0a0a0a;
+            --dark-card: #141414;
+            --light: #FFFFFF;
+            --gray-bg: #111111;
+            --gray-text: #A0A0A5;
+            --gold-gradient: linear-gradient(135deg, #FFDF00 0%, #D4AF37 100%);
+            --orange-gradient: linear-gradient(135deg, #FF8800 0%, #FF5500 100%);
+            --neon-shadow: 0 0 10px rgba(255, 102, 0, 0.4), 0 0 20px rgba(255, 102, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .italic-title {
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--orange-gradient);
+            color: var(--light);
+            box-shadow: var(--neon-shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.6), 0 0 30px rgba(255, 102, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            box-shadow: inset 0 0 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 102, 0, 0.1);
+            box-shadow: inset 0 0 20px rgba(255, 102, 0, 0.3), var(--neon-shadow);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        
+        /* Cyberpunk Glitch Effect on Hover for Titles */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #fff;
+            text-shadow: 2px 0 var(--primary), -2px 0 #0ff;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 102, 0, 0.2);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--light);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav ul a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav ul a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        nav ul a:hover::after {
+            width: 100%;
+        }
+
+        nav ul a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            background: linear-gradient(to right, rgba(10,10,10,0.9) 20%, rgba(10,10,10,0.5)), url('https://images.unsplash.com/photo-1552674605-db6aea11e511?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: var(--light);
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFDF00;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            display: inline-block;
+            border-left: 3px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--primary);
+            background: var(--orange-gradient);
+            -webkit-background-clip: text;
+            text-shadow: none;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-text);
+            margin-bottom: 40px;
+            max-width: 600px;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--dark);
+            position: relative;
+        }
+        
+        .about::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,102,0,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            border: 1px solid rgba(255,102,0,0.2);
+            box-shadow: inset 0 0 30px rgba(255,102,0,0.05), 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* High-tech badge */
+        .badge-logo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #050505;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.2), inset 0 0 20px rgba(255, 102, 0, 0.2);
+            border: 2px solid var(--primary);
+        }
+        
+        .badge-logo::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 1px dashed rgba(255, 102, 0, 0.5);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .badge-logo h2 {
+            font-size: 64px;
+            font-style: italic;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+        }
+
+        .badge-slogan {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--dark);
+            background: var(--primary);
+            padding: 4px 10px;
+            margin-top: 5px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 4px;
+            background-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray-text);
+            margin-bottom: 24px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--gray-bg);
+            border-top: 1px solid rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-header h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .services-header p {
+            color: var(--gray-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--dark-card);
+            border: 1px solid rgba(255, 102, 0, 0.1);
+            border-radius: 8px;
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--orange-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 102, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--neon-shadow);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 24px;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: var(--dark);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            align-items: stretch;
+        }
+
+        .price-card {
+            background-color: var(--dark-card);
+            border-radius: 8px;
+            padding: 50px 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s ease;
+        }
+
+        .price-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15);
+            z-index: 2;
+        }
+
+        .price-card:hover {
+            border-color: rgba(255, 102, 0, 0.5);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            background: var(--orange-gradient);
+            color: var(--light);
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 800;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .price-header h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--light);
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .price-amount span {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gray-text);
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .price-features li {
+            font-size: 14px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            color: #CCC;
+        }
+
+        .price-features li::before {
+            content: '>';
+            color: var(--primary);
+            font-weight: 900;
+            margin-right: 12px;
+            font-family: monospace;
+            text-shadow: 0 0 5px var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            color: var(--light);
+            padding: 60px 0 30px 0;
+            border-top: 1px solid rgba(255, 102, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .footer-about h2 span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            color: var(--gray-text);
+            max-width: 400px;
+            font-size: 14px;
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(255, 102, 0, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero h1 {
+                font-size: 48px;
+            }
+            .price-card.featured {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; 
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo-text glitch-hover">ASK<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">A ASK</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 12px;">INICIAR_SISTEMA</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <p class="hero-tagline">ASK_PROTOCOLO_ESPORTIVO</p>
+                <h1 class="italic-title glitch-hover">Em Busca do Seu <span>Limite_</span></h1>
+                <p>Treinos personalizados, dados inteligentes e acompanhamento cibernético para você evoluir na corrida com precisão absoluta.</p>
+                <div class="hero-buttons">
+                    <a href="#planos" class="btn btn-primary">ACESSAR_PLANOS</a>
+                    <a href="#sobre" class="btn btn-secondary">DECODIFICAR_METODOLOGIA</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <div class="badge-logo">
+                        <h2>ASK</h2>
+                        <div class="badge-slogan">SYS.LIMITE.EXE</div>
+                    </div>
+                </div>
+                <div class="about-text reveal delay-1">
+                    <h2 class="section-title">A_Nossa_Origem</h2>
+                    <p>A ASK Assessoria de Corrida foi projetada com o propósito de reprogramar vidas através do esporte. Acreditamos que a corrida é uma atualização de hardware e software; trata-se de disciplina, superação diária e expansão de limites.</p>
+                    <p>Nossa interface conta com treinadores altamente qualificados que processam a individualidade biológica de cada atleta. Se você está em fase beta ou buscando a sua melhor marca, a ASK compila o caminho ideal para você chegar lá com segurança.</p>
+                    <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-secondary">CONECTAR_AO_TREINADOR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <h2>Nossos_Recursos</h2>
+                <p>Uma arquitetura completa montada para garantir a sua melhor performance e taxa de atualização constante no asfalto.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal delay-1">
+                    <div class="service-icon">📱</div>
+                    <h3>Sincronização_App</h3>
+                    <p>Treinos codificados especificamente para a sua rotina, entregues via nuvem semanalmente através de uma interface intuitiva.</p>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-icon">🏃‍♂️</div>
+                    <h3>Treinos_Locais</h3>
+                    <p>Pontos de conexão presenciais para correção biomecânica e treinos de alta frequência monitorados em tempo real.</p>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-icon">⛺</div>
+                    <h3>Base_Operacional</h3>
+                    <p>Hardware de apoio nas principais provas regionais, oferecendo recuperação energética (hidratação/frutas) e suporte técnico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos" class="pricing">
+        <div class="container">
+            <div class="services-header reveal">
+                <h2>Módulos_de_Assinatura</h2>
+                <p>Selecione a licença que melhor se adapta ao seu ciclo de processamento e integre-se à rede laranja.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card reveal delay-1">
+                    <div class="price-header">
+                        <h3>Módulo V1 (Mensal)</h3>
+                        <p>Flexibilidade tática</p>
+                        <div class="price-amount">R$ 149<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Protocolo de treinos via App</li>
+                        <li>Análise de telemetria semanal</li>
+                        <li>Acesso aos nodos presenciais</li>
+                        <li>Suporte nível 1 via WhatsApp</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-secondary" style="text-align: center;">INICIAR_V1</a>
+                </div>
+
+                <div class="price-card featured reveal delay-2">
+                    <span class="badge-popular">RECOMENDADO</span>
+                    <div class="price-header">
+                        <h3>Módulo V2 (Semestral)</h3>
+                        <p>Foco de médio alcance</p>
+                        <div class="price-amount">R$ 119<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Protocolo premium desbloqueado</li>
+                        <li>Suporte de acesso prioritário</li>
+                        <li>Análise avançada de biomecânica</li>
+                        <li>Skin exclusiva (Camiseta ASK)</li>
+                        <li>Acesso VIP à Base Operacional</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-primary" style="text-align: center;">INICIAR_V2_PRO</a>
+                </div>
+
+                <div class="price-card reveal delay-3">
+                    <div class="price-header">
+                        <h3>Módulo V3 (Anual)</h3>
+                        <p>Integração total do sistema</p>
+                        <div class="price-amount">R$ 99<span>/mês</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Todos os recursos da versão Pro</li>
+                        <li>Macro-planejamento de sistema</li>
+                        <li>Bypass de descontos (Parceiros)</li>
+                        <li>2x Skins exclusivas ASK</li>
+                        <li>Máxima eficiência energética</li>
+                    </ul>
+                    <a href="https://wa.me/seu-numero" target="_blank" class="btn btn-secondary" style="text-align: center;">INICIAR_V3_MAX</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <h2>ASK<span>_</span></h2>
+                <p>Seu sistema operacional para esportes. Atualizando você além das marcas, quebrando firewalls e correndo em busca do seu limite.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Diretórios</h4>
+                <ul>
+                    <li><a href="#inicio">/root/inicio</a></li>
+                    <li><a href="#sobre">/usr/sobre</a></li>
+                    <li><a href="#servicos">/bin/servicos</a></li>
+                    <li><a href="#planos">/etc/planos</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Conexões</h4>
+                <ul>
+                    <li><a href="#" target="_blank">Instagram (@ask_assessoria)</a></li>
+                    <li><a href="#" target="_blank">Porta de Comunicação (WhatsApp)</a></li>
+                    <li><a href="#">Terminal do Atleta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>SYS.DATE: 2026 // ASK ASSESSORIA // TODOS_OS_DIREITOS_CRIPTOGRAFADOS</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(
+                entries,
+                observer
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>

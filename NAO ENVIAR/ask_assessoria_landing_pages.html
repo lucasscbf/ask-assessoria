@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASK Assessoria de Corrida - Protótipos de Layout</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,400;0,700;0,900;1,900&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for layout transitions */
+        .layout-variant {
+            display: none;
+        }
+        .layout-variant.active {
+            display: block;
+        }
+        
+        /* Font styles per theme */
+        .theme-performance {
+            font-family: 'Hubot Sans', sans-serif;
+        }
+        .theme-premium {
+            font-family: 'Inter', sans-serif;
+        }
+        .theme-pelotao {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen antialiased">
+
+    <!-- FIXED TOP BAR: LAYOUT SWITCHER -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-zinc-900 border-b border-zinc-800 px-4 py-3 shadow-2xl backdrop-blur-md bg-opacity-95">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></span>
+                <span class="text-xs font-mono text-zinc-400 tracking-wider uppercase font-bold">ASK Fullstack Previewer</span>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 bg-black p-1 rounded-xl border border-zinc-800">
+                <button onclick="switchLayout('performance')" id="btn-performance" class="px-4 py-2 text-xs md:text-sm font-semibold rounded-lg transition-all duration-300 bg-orange-600 text-white shadow-lg shadow-orange-600/20">
+                    🔥 1. Performance (Adrenalina)
+                </button>
+                <button onclick="switchLayout('premium')" id="btn-premium" class="px-4 py-2 text-xs md:text-sm font-semibold text-zinc-400 hover:text-white rounded-lg transition-all duration-300">
+                    💎 2. Premium Club (Exclusivo)
+                </button>
+                <button onclick="switchLayout('pelotao')" id="btn-pelotao" class="px-4 py-2 text-xs md:text-sm font-semibold text-zinc-400 hover:text-white rounded-lg transition-all duration-300">
+                    👥 3. O Pelotão (Comunidade)
+                </button>
+            </div>
+            <div class="hidden lg:block text-right">
+                <p class="text-xs text-zinc-400">Cidade: <strong class="text-orange-500">Teresina - PI</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPACER TO PREVENT TOP BAR OVERLAP -->
+    <div class="h-24 md:h-16"></div>
+
+    <!-- ================================================================= -->
+    <!-- VARIAÇÃO 1: PERFORMANCE (ADRENALINA & VELOCIDADE) -->
+    <!-- ================================================================= -->
+    <div id="variant-performance" class="layout-variant active theme-performance bg-black text-zinc-100">
+        
+        <!-- Navbar -->
+        <nav class="border-b border-zinc-900 bg-zinc-950/80 sticky top-16 md:top-14 z-40 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2 font-black italic text-xl tracking-tighter">
+                    <!-- LOGO: Corredor + Raio SVG -->
+                    <svg class="w-8 h-8 text-orange-500 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.5,4.5 C19.5,5.33 18.83,6 18,6 C17.17,6 16.5,5.33 16.5,4.5 C16.5,3.67 17.17,3 18,3 C18.83,3 19.5,3.67 19.5,4.5 Z M12.65,11.5 L14.7,15.58 L19.2,16.5 L15.75,12.75 L16.3,9.4 C17.7,11 19.7,12 22,12 L22,10 C20.1,10 18.5,9.1 17.6,7.7 L16.65,6.1 C16.25,5.5 15.55,5.1 14.8,5.1 C14.5,5.1 14.2,5.2 13.9,5.3 L8,7.8 L8,13 L10,13 L10,9.6 L12.3,8.6 L10.55,17.1 L6,15.5 L5.3,17.4 L11.3,19.5 L12.65,11.5 Z M4,13 L2,13 L2,11 L4,11 L4,13 Z M6,9 L4,9 L4,7 L6,7 L6,9 Z M5,17 L3,17 L3,15 L5,15 L5,17 Z" />
+                    </svg>
+                    <span>ASK<span class="text-orange-500">⚡</span>PERFORMANCE</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6 font-bold uppercase text-xs tracking-wider">
+                    <a href="#perf-sobre" class="hover:text-orange-500 transition">Sobre</a>
+                    <a href="#perf-servicos" class="hover:text-orange-500 transition">Modalidades</a>
+                    <a href="#perf-resultados" class="hover:text-orange-500 transition">Resultados</a>
+                    <a href="#perf-planos" class="hover:text-orange-500 transition">Planos</a>
+                    <a href="#perf-contato" class="hover:text-orange-500 transition">Localização</a>
+                </div>
+                <a href="https://wa.me/5586999565861?text=Quero%20agendar%20uma%20aula%20experimental%20na%20ASK" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-black font-black uppercase text-xs px-5 py-2.5 rounded-none transform -skew-x-12 transition">
+                    Aula Experimental ⚡
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center justify-center bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-950/40 via-zinc-950 to-black overflow-hidden px-4 py-20">
+            <div class="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <div class="inline-block bg-orange-500/10 border border-orange-500/30 text-orange-500 font-bold uppercase text-xs tracking-widest px-4 py-1.5 rounded-none mb-6 transform -skew-x-6">
+                    Acelere o seu ritmo em Teresina
+                </div>
+                <h1 class="text-5xl md:text-8xl font-black italic tracking-tighter uppercase mb-6 leading-none">
+                    NÃO É SÓ CORRER.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600">É EVOLUIR CADA METRO.</span>
+                </h1>
+                <p class="text-zinc-400 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-10 tracking-normal">
+                    Assessoria de corrida presencial e planilhas personalizadas. Treine com foco, quebre recordes pessoais e domine o asfalto sob o comando de especialistas.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#perf-inscricao" class="w-full sm:w-auto bg-orange-600 hover:bg-orange-500 text-black font-black uppercase tracking-wider px-8 py-4 text-sm transform -skew-x-12 transition text-center shadow-xl shadow-orange-600/20">
+                        Começar Agora / Inscrição
+                    </a>
+                    <a href="#perf-planos" class="w-full sm:w-auto bg-transparent hover:bg-zinc-900 border-2 border-zinc-800 text-white font-bold uppercase tracking-wider px-8 py-3.5 text-sm transform -skew-x-12 transition text-center">
+                        Ver Planos & Preços
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre a ASK -->
+        <section id="perf-sobre" class="py-24 border-t border-zinc-900 bg-zinc-950">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="w-12 h-1 bg-orange-500"></div>
+                    <h2 class="text-3xl md:text-5xl font-black italic uppercase tracking-tight">HISTÓRIA & PROPÓSITO</h2>
+                    <p class="text-zinc-400 leading-relaxed text-base">
+                        A ASK Assessoria de Corrida nasceu com a missão de transformar vidas através do esporte de alta performance e do acolhimento. Unindo técnica apurada, planilhas inteligentes e treinos presenciais dinâmicos na Avenida Marechal Castelo Branco, preparamos entusiastas e atletas para cruzar qualquer linha de chegada.
+                    </p>
+                    <p class="text-zinc-400 leading-relaxed text-base">
+                        Do primeiro trote de 5km à intensidade de uma maratona completa, nosso compromisso é oferecer estrutura profissional e suporte contínuo para que você corra com segurança, consistência e energia máxima.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-zinc-900 to-black p-8 border border-zinc-800 relative">
+                    <div class="absolute -top-3 -left-3 bg-orange-500 w-6 h-6 flex items-center justify-center text-black font-black text-xs">⚡</div>
+                    <h3 class="text-xl font-bold uppercase italic text-orange-500 mb-4">Nossa Filosofia de Treino</h3>
+                    <ul class="space-y-3 font-medium text-sm text-zinc-300">
+                        <li class="flex items-center gap-3"><span class="text-orange-500">✓</span> Periodização científica individualizada</li>
+                        <li class="flex items-center gap-3"><span class="text-orange-500">✓</span> Prevenção de lesões com fortalecimento específico</li>
+                        <li class="flex items-center gap-3"><span class="text-orange-500">✓</span> Comunidade focada em superação diária</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Serviços / Modalidades -->
+        <section id="perf-servicos" class="py-24 bg-black relative">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black italic uppercase tracking-tight mb-4">NOSSOS SERVIÇOS</h2>
+                    <p class="text-zinc-500 text-sm max-w-md mx-auto uppercase tracking-wider">Soluções completas para potencializar a sua corrida</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Item 1 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">01</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Assessoria de Corrida Presencial</h3>
+                        <p class="text-zinc-400 text-sm">Treinos coletivos guiados com acompanhamento em tempo real dos treinadores nos principais pontos de Teresina.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">02</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Treinos Personalizados / Online</h3>
+                        <p class="text-zinc-400 text-sm">Planilhas dinâmicas entregues via aplicativo de acordo com a sua rotina, nível de condicionamento e objetivos.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">03</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Preparação para Provas</h3>
+                        <p class="text-zinc-400 text-sm">Ciclos estruturados para bater metas nas distâncias de 5k, 10k, Meia Maratona e Maratona.</p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">04</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Corrida em Grupo / Pelotão</h3>
+                        <p class="text-zinc-400 text-sm">Treine em pelotões divididos por ritmo (pace) para impulsionar a sua performance e motivação.</p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">05</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Avaliação Física Contínua</h3>
+                        <p class="text-zinc-400 text-sm">Análise periódica de composição corporal e evolução biomecânica para refinar sua técnica.</p>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="bg-zinc-950 p-8 border-l-4 border-orange-600 hover:bg-zinc-900 transition duration-300">
+                        <div class="text-orange-500 font-black text-2xl mb-4">06</div>
+                        <h3 class="text-xl font-bold uppercase mb-2">Personal Trainer / Musculação</h3>
+                        <p class="text-zinc-400 text-sm">Trabalho complementar focado em fortalecimento muscular, potência e prevenção de lesões.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Treinadores -->
+        <section class="py-24 bg-zinc-950">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black italic uppercase tracking-tight mb-4">EQUIPE DE TREINADORES</h2>
+                    <p class="text-zinc-500 text-sm uppercase tracking-wider">Liderados por profissionais especialistas em corrida de rua</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-zinc-900 p-6 border border-zinc-800 flex flex-col sm:flex-row gap-6 items-center">
+                        <div class="w-32 h-32 bg-zinc-800 rounded-none border-2 border-orange-500 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Foto Treinador</div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-xl font-bold uppercase text-white mb-1">Coach Principal ASK</h3>
+                            <p class="text-orange-500 text-xs font-bold uppercase mb-3">Especialista em Performance & Biomecânica</p>
+                            <p class="text-zinc-400 text-sm">Profissional de Educação Física com anos de experiência em maratonas e treinamento de corrida de rua.</p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-900 p-6 border border-zinc-800 flex flex-col sm:flex-row gap-6 items-center">
+                        <div class="w-32 h-32 bg-zinc-800 rounded-none border-2 border-orange-500 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Foto Treinadora</div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-xl font-bold uppercase text-white mb-1">Coach Fisiologia ASK</h3>
+                            <p class="text-orange-500 text-xs font-bold uppercase mb-3">Especialista em Endurance & Fortalecimento</p>
+                            <p class="text-zinc-400 text-sm">Preparadora física dedicada ao desenvolvimento de ritmos consistentes e treinos de tiros intervalados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados e Conquistas (Abaixo dos Serviços) -->
+        <section id="perf-resultados" class="py-24 bg-black border-t border-b border-zinc-900">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-16">
+                    <div>
+                        <h2 class="text-4xl md:text-6xl font-black italic uppercase tracking-tight">RESULTADOS REAIS</h2>
+                        <p class="text-orange-500 font-bold uppercase text-xs tracking-wider mt-2">Métricas e subidas ao pódio de quem treina na ASK</p>
+                    </div>
+                    <div class="text-5xl md:text-7xl font-black text-zinc-800 italic uppercase select-none mt-4 md:mt-0">⚡ METRICS</div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-zinc-950 p-6 border border-zinc-800 transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-2">3ª Corrida do Servidor Público</div>
+                        <div class="text-3xl font-black italic uppercase mb-2 text-white">Top 5 Geral Masculino</div>
+                        <p class="text-zinc-400 text-sm">Atleta ASK alcançando ritmo médio de prova impressionante em Teresina.</p>
+                    </div>
+                    <div class="bg-zinc-950 p-6 border border-zinc-800 transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-2">100% Você - Teresina</div>
+                        <div class="text-3xl font-black italic uppercase mb-2 text-white">Recordes Pessoais batidos</div>
+                        <p class="text-zinc-400 text-sm">Mais de 15 alunos baixaram seus tempos (PBs) nas distâncias de 5k e 10k.</p>
+                    </div>
+                    <div class="bg-zinc-950 p-6 border border-zinc-800 transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-2">Desafio de Endurance</div>
+                        <div class="text-3xl font-black italic uppercase mb-2 text-white">Sub 1h30m Meia Maratona</div>
+                        <p class="text-zinc-400 text-sm">Planejamento e planilhas online executadas com perfeição estratégica pelos nossos corredores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria de Fotos e Depoimentos -->
+        <section class="py-24 bg-zinc-950">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-black italic uppercase text-white mb-6">MOMENTOS REAIS / TREINOS & PROVAS</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Treino Marechal</div>
+                        <div class="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Pelotão ASK</div>
+                        <div class="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Linha de Chegada</div>
+                        <div class="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center font-bold text-zinc-600 text-xs uppercase">Entrega de Medalhas</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black italic uppercase text-white mb-6">DEPOIMENTOS DE ALUNOS</h3>
+                    <div class="space-y-6">
+                        <blockquote class="bg-zinc-900 p-6 border-l-2 border-orange-500">
+                            <p class="text-zinc-300 text-sm italic">"A ASK mudou completamente minha perspectiva de treino. Consegui evoluir meu ritmo de forma segura e hoje faço parte de uma comunidade incrível que se apoia a cada treino."</p>
+                            <cite class="block text-orange-500 text-xs font-bold uppercase mt-3">— Aluno Praticante, Teresina</cite>
+                        </blockquote>
+                        <blockquote class="bg-zinc-900 p-6 border-l-2 border-orange-500">
+                            <p class="text-zinc-300 text-sm italic">"As planilhas digitais são extremamente precisas. Consegui conciliar minha rotina de trabalho e bati minha meta de tempo na última Meia Maratona!"</p>
+                            <cite class="block text-orange-500 text-xs font-bold uppercase mt-3">— Aluna Maratonista, ASK Online</cite>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planos e Preços -->
+        <section id="perf-planos" class="py-24 bg-black border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black italic uppercase tracking-tight mb-4">PLANOS & INVESTIMENTO</h2>
+                    <p class="text-zinc-500 text-sm uppercase tracking-wider">Escolha a modalidade perfeita para a sua evolução esportiva</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Plano 1 -->
+                    <div class="bg-zinc-950 p-8 border border-zinc-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold uppercase text-white mb-2">Planilha Online</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-6">R$ 119<span class="text-sm font-normal text-zinc-500">/mês</span></div>
+                            <ul class="space-y-3 text-sm text-zinc-400 mb-8 font-medium">
+                                <li>• Planilhas de treino via aplicativo</li>
+                                <li>• Feedback semanal dos técnicos</li>
+                                <li>• Suporte para dúvidas via WhatsApp</li>
+                                <li>• Preparação para qualquer distância</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Quero%20contratar%20o%20Plano%20Planilha%20Online" class="block w-full bg-zinc-900 hover:bg-orange-600 hover:text-black text-center text-white font-bold uppercase text-xs py-3 transition">Selecionar Plano</a>
+                    </div>
+                    <!-- Plano 2 (Destaque) -->
+                    <div class="bg-zinc-950 p-8 border-2 border-orange-500 flex flex-col justify-between relative transform lg:-translate-y-2">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-orange-500 text-black font-black text-[10px] uppercase tracking-widest px-3 py-0.5">MAIS PROCURADO</div>
+                        <div>
+                            <h3 class="text-xl font-bold uppercase text-white mb-2">Presencial Completo</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-6">R$ 169<span class="text-sm font-normal text-zinc-500">/mês</span></div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 font-medium">
+                                <li>• Todos os benefícios do plano online</li>
+                                <li>• Treinos presenciais acompanhados</li>
+                                <li>• Suporte de hidratação nos treinos</li>
+                                <li>• Participação no Pelotão Oficial ASK</li>
+                                <li>• Avaliações físicas periódicas</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Quero%20contratar%20o%20Plano%20Presencial%20Completo" class="block w-full bg-orange-600 hover:bg-orange-500 text-center text-black font-black uppercase text-xs py-3 transition">Garantir Vaga ⚡</a>
+                    </div>
+                    <!-- Plano 3 -->
+                    <div class="bg-zinc-950 p-8 border border-zinc-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold uppercase text-white mb-2">Elite VIP</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-6">R$ 299<span class="text-sm font-normal text-zinc-500">/mês</span></div>
+                            <ul class="space-y-3 text-sm text-zinc-400 mb-8 font-medium">
+                                <li>• Acompanhamento ultra-individualizado</li>
+                                <li>• Personal Trainer / Fortalecimento incluso</li>
+                                <li>• Análise biomecânica de corrida por vídeo</li>
+                                <li>• Acesso direto premium aos treinadores</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Quero%20saber%20mais%20sobre%20o%20Plano%20Elite%20VIP" class="block w-full bg-zinc-900 hover:bg-orange-600 hover:text-black text-center text-white font-bold uppercase text-xs py-3 transition">Falar Conosco</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Inscrição -->
+        <section id="perf-inscricao" class="py-24 bg-zinc-950 border-t border-zinc-900">
+            <div class="max-w-xl mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black italic uppercase mb-2">PRÉ-INSCRIÇÃO & CONTATO</h2>
+                    <p class="text-zinc-400 text-sm">Preencha seus dados para receber o contato da nossa equipe comercial.</p>
+                </div>
+                <form onsubmit="event.preventDefault(); alert('Inscrição simulada com sucesso!');" class="space-y-4">
+                    <input type="text" placeholder="Nome Completo" required class="w-full bg-black border border-zinc-800 p-3 text-sm rounded-none text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500">
+                    <input type="tel" placeholder="Telefone / WhatsApp" required class="w-full bg-black border border-zinc-800 p-3 text-sm rounded-none text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500">
+                    <select class="w-full bg-black border border-zinc-800 p-3 text-sm rounded-none text-zinc-400 focus:outline-none focus:border-orange-500">
+                        <option>Qual o seu objetivo principal?</option>
+                        <option>Começar a correr do zero</option>
+                        <option>Melhorar meu pace / rendimento</option>
+                        <option>Preparação para provas específicas</option>
+                        <option>Saúde, emagrecimento e qualidade de vida</option>
+                    </select>
+                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-500 text-black font-black uppercase text-xs py-4 tracking-wider transition">Enviar Formulário de Inscrição ⚡</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Localização e Footer -->
+        <footer id="perf-contato" class="bg-black text-zinc-400 text-sm py-16 border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <div class="space-y-4">
+                    <div class="font-black italic text-xl text-white tracking-tighter">ASK<span class="text-orange-500">⚡</span>CORRIDA</div>
+                    <p class="text-zinc-500 max-w-xs">Estrutura premium, técnica e acolhimento para levar sua corrida ao próximo nível de velocidade.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold uppercase text-white tracking-wider text-xs text-orange-500">LOCALIZAÇÃO & TREINOS</h4>
+                    <p class="text-zinc-300">📍 Av. Mar. Castelo Branco - Centro (Sul), Teresina - PI, 64000-590, Brasil</p>
+                    <p class="text-zinc-500 text-xs">Horários presenciais: Terças e Quintas às 19:00h | Sábados às 06:00h</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold uppercase text-white tracking-wider text-xs text-orange-500">CANAIS DE CONTATO</h4>
+                    <p class="text-zinc-300">📞 Telefone: <strong>(86) 99956-5861</strong></p>
+                    <p class="text-zinc-300">📸 Instagram: <a href="https://instagram.com/ask_assessoria" target="_blank" class="hover:text-orange-500 transition font-bold">@ask_assessoria</a></p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 border-t border-zinc-900 pt-8 text-center text-xs text-zinc-600 font-mono">
+                &copy; 2026 ASK Assessoria de Corrida. Desenvolvido com foco em alta performance.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- VARIAÇÃO 2: THE PREMIUM CLUB (SOFISTICAÇÃO & EXCLUSIVIDADE) -->
+    <!-- ================================================================= -->
+    <div id="variant-premium" class="layout-variant theme-premium bg-zinc-950 text-zinc-200">
+        
+        <!-- Navbar -->
+        <nav class="border-b border-zinc-900 bg-zinc-950/90 sticky top-16 md:top-14 z-40 backdrop-blur-xl">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-3 font-semibold text-lg tracking-widest uppercase">
+                    <!-- LOGO SVG -->
+                    <svg class="w-7 h-7 text-orange-500 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.5,4.5 C19.5,5.33 18.83,6 18,6 C17.17,6 16.5,5.33 16.5,4.5 C16.5,3.67 17.17,3 18,3 C18.83,3 19.5,3.67 19.5,4.5 Z M12.65,11.5 L14.7,15.58 L19.2,16.5 L15.75,12.75 L16.3,9.4 C17.7,11 19.7,12 22,12 L22,10 C20.1,10 18.5,9.1 17.6,7.7 L16.65,6.1 C16.25,5.5 15.55,5.1 14.8,5.1 C14.5,5.1 14.2,5.2 13.9,5.3 L8,7.8 L8,13 L10,13 L10,9.6 L12.3,8.6 L10.55,17.1 L6,15.5 L5.3,17.4 L11.3,19.5 L12.65,11.5 Z M4,13 L2,13 L2,11 L4,11 L4,13 Z M6,9 L4,9 L4,7 L6,7 L6,9 Z M5,17 L3,17 L3,15 L5,15 L5,17 Z" />
+                    </svg>
+                    <span>ASK <span class="text-orange-500 font-light">| CLUB</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase font-medium text-zinc-400">
+                    <a href="#prem-sobre" class="hover:text-white transition">O Clube</a>
+                    <a href="#prem-servicos" class="hover:text-white transition">Modalidades</a>
+                    <a href="#prem-coaches" class="hover:text-white transition">Mentores</a>
+                    <a href="#prem-planos" class="hover:text-white transition">Planos</a>
+                </div>
+                <a href="https://wa.me/5586999565861?text=Gostaria%20de%20agendar%20uma%20visita%20e%20aula%20experimental%20no%20Premium%20Club%20ASK" target="_blank" class="border border-orange-500 hover:bg-orange-500 hover:text-black text-orange-500 font-medium text-xs tracking-widest uppercase px-5 py-2.5 transition duration-300 rounded-md">
+                    Agendar Experiência
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="min-h-[85vh] flex items-center justify-center px-6 relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
+            <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
+                <span class="text-xs uppercase tracking-widest text-orange-500 font-semibold bg-orange-500/5 px-4 py-1.5 border border-orange-500/20 rounded-full">High Performance Running Consultancy</span>
+                <h1 class="text-4xl md:text-7xl font-light tracking-tight text-white leading-tight">
+                    A alta performance encontra a <span class="font-normal text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">exclusividade.</span>
+                </h1>
+                <p class="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    A ASK Club oferece um ecossistema completo para corredores exigentes. Treinamentos individualizados presenciais em Teresina com suporte tecnológico avançado em planilhas digitais.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#prem-inscricao" class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-black font-semibold text-xs tracking-widest uppercase px-8 py-4 transition duration-300 rounded-md shadow-lg shadow-orange-500/10">
+                        Preencher Inscrição
+                    </a>
+                    <a href="#prem-planos" class="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-medium text-xs tracking-widest uppercase px-8 py-4 transition duration-300 rounded-md border border-zinc-800">
+                        Consultar Planos Premium
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Planos e Preços em Destaque Centralizado -->
+        <section id="prem-planos" class="py-24 border-t border-zinc-900 bg-zinc-900/30">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 space-y-2">
+                    <span class="text-xs font-mono uppercase text-orange-500 tracking-widest">Membership</span>
+                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white">NOSSOS PLANOS EXCLUSIVOS</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Card 1 -->
+                    <div class="bg-zinc-900/40 p-8 border border-zinc-800 rounded-xl backdrop-blur-md flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                        <div>
+                            <div class="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-2">Digital Only</div>
+                            <h3 class="text-xl font-normal text-white mb-4">Planilha Online</h3>
+                            <div class="text-4xl font-light text-white mb-6">R$ 119<span class="text-xs text-zinc-500 font-normal"> / mês</span></div>
+                            <p class="text-zinc-400 text-sm mb-6 font-light leading-relaxed">Planejamento focado nos seus objetivos individuais, atualizado semanalmente através do nosso ecossistema digital.</p>
+                            <hr class="border-zinc-800 my-4">
+                            <ul class="space-y-3 text-xs text-zinc-400 font-light">
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Cronograma via aplicativo especializado</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Ajuste de metas e distâncias livres</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Feedback e relatórios semanais</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Digital%20Premium" class="mt-8 block text-center text-xs tracking-widest uppercase font-medium border border-zinc-700 hover:border-orange-500 text-zinc-300 hover:text-white py-3 transition rounded-md">Contratar</a>
+                    </div>
+                    <!-- Card 2 Destaque Glassmorphism -->
+                    <div class="bg-gradient-to-b from-zinc-900 to-zinc-950 p-8 border border-orange-500/50 rounded-xl flex flex-col justify-between shadow-2xl relative hover:border-orange-500 transition duration-300">
+                        <div class="absolute -top-3 left-6 bg-orange-500 text-black font-semibold text-[9px] tracking-widest uppercase px-3 py-1 rounded-full">Recomendado</div>
+                        <div>
+                            <div class="text-xs font-bold tracking-widest text-orange-500 uppercase mb-2">Full Experience</div>
+                            <h3 class="text-xl font-normal text-white mb-4">Presencial Completo</h3>
+                            <div class="text-4xl font-light text-white mb-6">R$ 169<span class="text-xs text-zinc-500 font-normal"> / mês</span></div>
+                            <p class="text-zinc-400 text-sm mb-6 font-light leading-relaxed">A fusão ideal entre a inteligência das planilhas online e a orientação técnica em tempo real na Avenida Marechal Castelo Branco.</p>
+                            <hr class="border-zinc-800 my-4">
+                            <ul class="space-y-3 text-xs text-zinc-300 font-light">
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Todos os recursos digitais incluídos</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Presença nos treinos em grupo orientados</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Suporte de hidratação e infraestrutura premium</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Avaliações biomecânicas mensais</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Presencial%20Completo%20Club" class="mt-8 block text-center text-xs tracking-widest uppercase font-semibold bg-orange-500 hover:bg-orange-600 text-black py-3 transition rounded-md">Adquirir Acesso</a>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-zinc-900/40 p-8 border border-zinc-800 rounded-xl backdrop-blur-md flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                        <div>
+                            <div class="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-2">Private Track</div>
+                            <h3 class="text-xl font-normal text-white mb-4">Elite VIP</h3>
+                            <div class="text-4xl font-light text-white mb-6">R$ 299<span class="text-xs text-zinc-500 font-normal"> / mês</span></div>
+                            <p class="text-zinc-400 text-sm mb-6 font-light leading-relaxed">Para quem busca atenção absoluta e máxima otimização biológica. Mentoria direta e integração com musculação/personal.</p>
+                            <hr class="border-zinc-800 my-4">
+                            <ul class="space-y-3 text-xs text-zinc-400 font-light">
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Atendimento ultra-individualizado customizado</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Sessões de musculação integrada para corrida</li>
+                                <li class="flex items-center gap-2"><span class="text-orange-500">✓</span> Canal direto 24/7 com os técnicos principais</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Elite%20VIP%20Club" class="mt-8 block text-center text-xs tracking-widest uppercase font-medium border border-zinc-700 hover:border-orange-500 text-zinc-300 hover:text-white py-3 transition rounded-md">Solicitar Convite</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- História / Sobre -->
+        <section id="prem-sobre" class="py-24 border-t border-zinc-900 bg-zinc-950">
+            <div class="max-w-5xl mx-auto px-6 text-center space-y-6">
+                <span class="text-orange-500 tracking-widest text-xs uppercase font-medium">Sobre a ASK</span>
+                <h2 class="text-3xl font-light text-white tracking-tight">CIÊNCIA E PERFORMANCE EM MOVIMENTO</h2>
+                <p class="text-zinc-400 leading-relaxed font-light text-base max-w-3xl mx-auto">
+                    Acreditamos que a corrida de rua de alto nível exige precisão metodológica e atenção aos detalhes. A ASK Assessoria de Corrida constrói trajetórias sólidas desde as primeiras passadas até maratonas completas, garantindo que cada aluno atinja sua melhor versão com saúde, técnica refinada e energia premium.
+                </p>
+            </div>
+        </section>
+
+        <!-- Serviços Grid de Linhas Finas -->
+        <section id="prem-servicos" class="py-24 bg-zinc-950 border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-zinc-800">
+                    <div class="p-10 border-b md:border-r border-zinc-800 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">01. Assessoria Presencial</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Sessões técnicas supervisionadas em Teresina para ajuste dinâmico de postura, cadência e ritmo de corrida.</p>
+                    </div>
+                    <div class="p-10 border-b lg:border-r border-zinc-800 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">02. Planilhas Online</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Algoritmos de treino customizados e distribuídos semanalmente de acordo com a sua capacidade adaptativa.</p>
+                    </div>
+                    <div class="p-10 border-b md:border-r lg:border-r-0 border-zinc-800 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">03. Preparação para Provas</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Periodização exata voltada para provas de 5k, 10k, Meia Maratona e Maratonas nacionais ou internacionais.</p>
+                    </div>
+                    <div class="p-10 border-b lg:border-b-0 lg:border-r border-zinc-800 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">04. Pelotões de Ritmo</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Agrupamentos dinâmicos focados em manutenção estável de Pace, elevando o estímulo psicológico e o foco social.</p>
+                    </div>
+                    <div class="p-10 border-r-0 md:border-r border-zinc-800 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">05. Avaliação Corporal</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Controle métrico antropométrico e acompanhamento de indicadores físicos para monitoramento de evolução real.</p>
+                    </div>
+                    <div class="p-10 space-y-4 hover:bg-zinc-900/30 transition">
+                        <h3 class="text-lg font-normal text-white uppercase tracking-wider">06. Fortalecimento Integrado</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Programas especializados de musculação voltados para ganho de economia de corrida e blindagem articular.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipe de Treinadores -->
+        <section id="prem-coaches" class="py-24 bg-zinc-900/20 border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 space-y-2">
+                    <span class="text-xs uppercase text-orange-500 tracking-widest font-mono">Mentors</span>
+                    <h2 class="text-3xl font-light text-white">CORPO TÉCNICO ESPECIALIZADO</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div class="space-y-4">
+                        <div class="aspect-square bg-zinc-900 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 uppercase tracking-widest text-xs font-light">Foto do Treinador Principal</div>
+                        <h3 class="text-xl font-normal text-white tracking-wide uppercase">Treinador Líder ASK</h3>
+                        <p class="text-orange-500 text-xs uppercase tracking-widest">Coordenador de Performance Técnica</p>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Especialista em fisiologia do exercício de endurance, direcionando atletas amadores rumo a subidas constantes de pódio.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="aspect-square bg-zinc-900 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 uppercase tracking-widest text-xs font-light">Foto da Treinadora Adjunta</div>
+                        <h3 class="text-xl font-normal text-white tracking-wide uppercase">Treinadora de Biomecânica</h3>
+                        <p class="text-orange-500 text-xs uppercase tracking-widest">Mentora de Corrida e Cinesiologia</p>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Dedicada à reestruturação de passada, ganho de eficiência mecânica e planejamento estratégico de planilhas online.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados, Galeria e Depoimentos Integrados Premium -->
+        <section class="py-24 bg-zinc-950 border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-6 space-y-20">
+                <!-- Resultados -->
+                <div>
+                    <h3 class="text-xs uppercase tracking-widest text-orange-500 font-mono mb-8">Conquistas Recentes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="border-b border-zinc-800 pb-6">
+                            <span class="text-2xl text-white font-light block mb-2">3ª Corrida do Servidor</span>
+                            <p class="text-zinc-400 text-sm font-light">Atletas ASK no Top 5 Geral, demonstrando consistência tática absoluta no cenário regional.</p>
+                        </div>
+                        <div class="border-b border-zinc-800 pb-6">
+                            <span class="text-2xl text-white font-light block mb-2">100% Você Teresina</span>
+                            <p class="text-zinc-400 text-sm font-light">Evolução massiva de tempos individuais (PBs) nas categorias de velocidade (5k e 10k).</p>
+                        </div>
+                        <div class="border-b border-zinc-800 pb-6">
+                            <span class="text-2xl text-white font-light block mb-2">Maratonas & Meias</span>
+                            <p class="text-zinc-400 text-sm font-light">Estratégias digitais gerando marcas expressivas abaixo de 1h30m em meias maratonas de alto nível.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimentos de Alunos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-6">
+                    <div class="space-y-4">
+                        <h4 class="text-xs uppercase tracking-widest text-zinc-500 font-medium">Reconhecimento</h4>
+                        <p class="text-xl font-light text-white italic leading-relaxed">"A metodologia científica da ASK me permitiu evoluir de forma contínua e sem lesões. O suporte digital integrado à presença física dos mentores na Marechal traz uma segurança ímpar."</p>
+                        <span class="text-orange-500 text-xs tracking-widest uppercase block">— Membro Convidado, Teresina</span>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xs uppercase tracking-widest text-zinc-500 font-medium">Comunidade</h4>
+                        <p class="text-xl font-light text-white italic leading-relaxed">"Treinar em um ambiente que equilibra foco de elite com um acolhimento autêntico fez toda a diferença na minha rotina corporativa. Recomendo fortemente a ASK."</p>
+                        <span class="text-orange-500 text-xs tracking-widest uppercase block">— Executivo e Maratonista, ASK Club</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Inscrição Elegante -->
+        <section id="prem-inscricao" class="py-24 bg-zinc-900/10 border-t border-zinc-900">
+            <div class="max-w-md mx-auto px-6 space-y-8">
+                <div class="text-center space-y-2">
+                    <h2 class="text-3xl font-light text-white tracking-tight">SOLICITAR INGRESSO</h2>
+                    <p class="text-zinc-400 text-sm font-light">Inicie sua jornada de avaliação para o corpo técnico ASK.</p>
+                </div>
+                <form onsubmit="event.preventDefault(); alert('Solicitação registrada!');" class="space-y-4">
+                    <input type="text" placeholder="Nome Completo" required class="w-full bg-transparent border-b border-zinc-800 py-3 text-sm rounded-none text-white focus:outline-none focus:border-orange-500 transition">
+                    <input type="tel" placeholder="WhatsApp Corporativo" required class="w-full bg-transparent border-b border-zinc-800 py-3 text-sm rounded-none text-white focus:outline-none focus:border-orange-500 transition">
+                    <select class="w-full bg-transparent border-b border-zinc-800 py-3 text-sm rounded-none text-zinc-500 focus:outline-none focus:border-orange-500 transition">
+                        <option class="bg-zinc-950">Selecione seu objetivo esportivo</option>
+                        <option class="bg-zinc-950">Transição para distâncias longas (Meia/Maratona)</option>
+                        <option class="bg-zinc-950">Otimização de Pace / Performance</option>
+                        <option class="bg-zinc-950">Iniciação Segura na Corrida de Rua</option>
+                    </select>
+                    <button type="submit" class="w-full bg-zinc-100 hover:bg-orange-500 hover:text-black text-black font-semibold text-xs tracking-widest uppercase py-4 transition duration-300 rounded-md">Enviar Solicitação de Adesão</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer / Localização -->
+        <footer class="bg-zinc-950 text-zinc-500 text-xs py-16 border-t border-zinc-900 font-light tracking-wide">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="font-semibold text-base text-white tracking-widest uppercase">ASK CLUB</div>
+                    <p class="leading-relaxed max-w-xs">Consultoria de corrida fundamentada em parâmetros técnicos avançados e atendimento focado na excelência individual.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-orange-500 font-medium tracking-widest uppercase">ENDEREÇO ATRIUM</h4>
+                    <p class="text-zinc-300 font-normal">📍 Av. Mar. Castelo Branco - Centro (Sul), Teresina - PI, 64000-590, Brasil</p>
+                    <p class="text-zinc-500">Sessões presenciais em horários estratégicos com estrutura técnica dedicada.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-orange-500 font-medium tracking-widest uppercase">CONEXÕES PRIVADAS</h4>
+                    <p class="text-zinc-300">📞 Central: <strong>(86) 99956-5861</strong></p>
+                    <p class="text-zinc-300">📸 Instagram Oficial: <a href="https://instagram.com/ask_assessoria" target="_blank" class="text-white hover:text-orange-500 transition font-normal">@ask_assessoria</a></p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 border-t border-zinc-900 pt-8 text-center text-zinc-600">
+                &copy; 2026 ASK Premium Club. Todos os direitos reservados.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- VARIAÇÃO 3: THE PACK / O PELOTÃO (COMUNIDADE & ACOLHIMENTO) -->
+    <!-- ================================================================= -->
+    <div id="variant-pelotao" class="layout-variant theme-pelotao bg-neutral-950 text-neutral-200">
+        
+        <!-- Navbar -->
+        <nav class="border-b border-neutral-800 bg-neutral-900/90 sticky top-16 md:top-14 z-40 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2 font-extrabold text-xl tracking-tight text-white">
+                    <!-- LOGO SVG -->
+                    <svg class="w-8 h-8 text-orange-500 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.5,4.5 C19.5,5.33 18.83,6 18,6 C17.17,6 16.5,5.33 16.5,4.5 C16.5,3.67 17.17,3 18,3 C18.83,3 19.5,3.67 19.5,4.5 Z M12.65,11.5 L14.7,15.58 L19.2,16.5 L15.75,12.75 L16.3,9.4 C17.7,11 19.7,12 22,12 L22,10 C20.1,10 18.5,9.1 17.6,7.7 L16.65,6.1 C16.25,5.5 15.55,5.1 14.8,5.1 C14.5,5.1 14.2,5.2 13.9,5.3 L8,7.8 L8,13 L10,13 L10,9.6 L12.3,8.6 L10.55,17.1 L6,15.5 L5.3,17.4 L11.3,19.5 L12.65,11.5 Z M4,13 L2,13 L2,11 L4,11 L4,13 Z M6,9 L4,9 L4,7 L6,7 L6,9 Z M5,17 L3,17 L3,15 L5,15 L5,17 Z" />
+                    </svg>
+                    <span>ASK <span class="text-orange-500">Assessoria</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-300">
+                    <a href="#pelo-sobre" class="hover:text-orange-500 transition">Nossa Família</a>
+                    <a href="#pelo-servicos" class="hover:text-orange-500 transition">O que Fazemos</a>
+                    <a href="#pelo-depoimentos" class="hover:text-orange-500 transition">Depoimentos</a>
+                    <a href="#pelo-planos" class="hover:text-orange-500 transition">Planos</a>
+                </div>
+                <a href="https://wa.me/5586999565861?text=Quero%20fazer%20uma%20aula%20experimental%20com%20o%20grupo%20da%20ASK" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-black font-bold text-sm px-5 py-2.5 rounded-full transition shadow-lg shadow-orange-500/20">
+                    Agendar Aula Grátis 🎉
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-neutral-900 to-neutral-950 px-4 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Correr sozinho é bom.<br>No <span class="text-orange-500">Pelotão ASK</span>, é extraordinário!
+                </h1>
+                <p class="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto font-normal">
+                    Descubra o poder de evoluir cercado por amigos e corredores que compartilham da mesma energia. Treinos acolhedores na Avenida Marechal Castelo Branco para todos os níveis de condicionamento.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://wa.me/5586999565861?text=Quero%20conversar%20no%20whatsapp%20sobre%20a%20ASK" target="_blank" class="w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white font-bold text-sm px-8 py-4 rounded-full transition shadow-lg flex items-center justify-center gap-2">
+                        <!-- WhatsApp Icon -->
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.288 1.499 4.96c.002 0 .003 0 .005 0 5.34 0 9.682-4.321 9.685-9.646.002-2.58-1.001-5.005-2.825-6.83C16.634 1.055 14.21 0 11.63 0 6.304 0 1.964 4.322 1.961 9.648c-.001 1.761.488 3.398 1.46 4.908l-.98 3.57 3.666-.962zm12.333-5.228c-.33-.165-1.951-.963-2.251-1.072-.3-.11-.518-.165-.736.165-.218.33-.843 1.072-1.034 1.293-.19.22-.381.247-.71.082-.33-.165-1.393-.513-2.656-1.642-.982-.877-1.643-1.96-1.836-2.29-.192-.33-.02-.509.145-.672.149-.147.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.413-.028-.578-.083-.165-.736-1.774-1.008-2.434-.265-.643-.535-.556-.736-.566-.19-.01-.408-.01-.626-.01-.218 0-.571.082-.871.413-.3.33-1.142 1.116-1.142 2.722 0 1.606 1.169 3.159 1.329 3.378.162.22 2.298 3.51 5.566 4.922.778.336 1.385.538 1.858.689.782.248 1.494.213 2.057.129.628-.094 1.952-.798 2.224-1.57.272-.771.272-1.432.19-1.57-.081-.138-.298-.22-.628-.385z"/></svg>
+                        Falar no WhatsApp
+                    </a>
+                    <a href="#pelo-planos" class="w-full sm:w-auto bg-neutral-800 hover:bg-neutral-700 text-white font-semibold text-sm px-8 py-4 rounded-full transition border border-neutral-700">
+                        Ver Opções de Planos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- História e Acolhimento -->
+        <section id="pelo-sobre" class="py-20 bg-neutral-950">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-orange-500 font-bold text-xs uppercase tracking-wider bg-orange-500/10 px-3 py-1 rounded-full">Nossa História</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">MAIS QUE UMA ASSESSORIA, UMA FAMÍLIA CORREDORA</h2>
+                    <p class="text-neutral-400 leading-relaxed">
+                        A ASK nasceu do desejo de criar um ambiente onde qualquer pessoa pudesse evoluir na corrida, independentemente do seu nível inicial. Aqui, os treinos coletivos de pelotão na Avenida Marechal Castelo Branco são repletos de incentivo recíproco e orientação próxima dos professores.
+                    </p>
+                    <p class="text-neutral-400 leading-relaxed">
+                        Nossa equipe equilibra a seriedade metodológica das planilhas personalizadas online com o calor e a motivação do treino em grupo presencial, garantindo que você se sinta acolhido em cada passo.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="h-40 bg-neutral-900 rounded-xl flex items-center justify-center p-4 text-center border border-neutral-800">
+                        <div>
+                            <div class="text-2xl font-extrabold text-orange-500 mb-1">+100</div>
+                            <div class="text-xs text-neutral-400 font-medium">Alunos Conectados</div>
+                        </div>
+                    </div>
+                    <div class="h-40 bg-neutral-900 rounded-xl flex items-center justify-center p-4 text-center border border-neutral-800">
+                        <div>
+                            <div class="text-2xl font-extrabold text-orange-500 mb-1">100%</div>
+                            <div class="text-xs text-neutral-400 font-medium">Suporte e Parceria</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria de Fotos e Vídeos em Destaque -->
+        <section class="py-20 bg-neutral-900/40 border-t border-b border-neutral-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12 space-y-2">
+                    <h2 class="text-3xl font-extrabold text-white">GALERIA DE SUPERAÇÃO</h2>
+                    <p class="text-neutral-400 text-sm">Energia pura capturada diretamente dos nossos treinos semanais e competições</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-600 uppercase p-2 text-center">Treino Coletivo Manhã</div>
+                    <div class="aspect-square bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-600 uppercase p-2 text-center">Largada Oficial Prova</div>
+                    <div class="aspect-square bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-600 uppercase p-2 text-center">Abraço da Conquista</div>
+                    <div class="aspect-square bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-600 uppercase p-2 text-center">Evolução de Ritmo</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Serviços / Modalidades (Cards Arredondados e Amigáveis) -->
+        <section id="pelo-servicos" class="py-20 bg-neutral-950">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16 space-y-2">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">MODALIDADES E SUPORTE</h2>
+                    <p class="text-neutral-400 text-sm">Tudo desenhado para sua evolução segura e amigável</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- S1 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">👟</div>
+                        <h3 class="text-lg font-bold text-white">Assessoria de Corrida Presencial</h3>
+                        <p class="text-neutral-400 text-sm">Encontros dinâmicos em grupo com professores instruindo sua postura de forma atenciosa e próxima.</p>
+                    </div>
+                    <!-- S2 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">📱</div>
+                        <h3 class="text-lg font-bold text-white">Treinos Personalizados Online</h3>
+                        <p class="text-neutral-400 text-sm">Planilhas enviadas direto no celular de forma muito fácil de ler e seguir no dia a dia corrido.</p>
+                    </div>
+                    <!-- S3 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">🥇</div>
+                        <h3 class="text-lg font-bold text-white">Preparação para Provas</h3>
+                        <p class="text-neutral-400 text-sm">Suporte completo focado em completar distâncias de 5k, 10k, meia maratona ou maratona com alegria.</p>
+                    </div>
+                    <!-- S4 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">👥</div>
+                        <h3 class="text-lg font-bold text-white">Corrida em Grupo / Pelotão</h3>
+                        <p class="text-neutral-400 text-sm">Sincronia perfeita com corredores do mesmo pace para impulsionar e acolher suas metas.</p>
+                    </div>
+                    <!-- S5 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">📊</div>
+                        <h3 class="text-lg font-bold text-white">Avaliação Física e Evolução</h3>
+                        <p class="text-neutral-400 text-sm">Análises contínuas de bem-estar corporal para monitorar de perto os seus ganhos de saúde.</p>
+                    </div>
+                    <!-- S6 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 space-y-3 hover:shadow-xl hover:shadow-orange-500/5 transition">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold">💪</div>
+                        <h3 class="text-lg font-bold text-white">Personal & Musculação</h3>
+                        <p class="text-neutral-400 text-sm">Exercícios específicos e estruturados de força muscular pensados para proteger suas articulações.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos e Resultados -->
+        <section id="pelo-depoimentos" class="py-20 bg-neutral-900/20">
+            <div class="max-w-5xl mx-auto px-4 space-y-12">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white">QUEM TREINA COM A GENTE COMPARTILHA</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 space-y-4">
+                        <p class="text-neutral-300 italic text-sm">"Eu achava que corrida era um esporte solitário, mas na ASK percebi que o apoio mútuo do grupo te leva muito mais longe. Concluí os 10km comemorações inesquecíveis!"</p>
+                        <div class="text-xs font-bold text-orange-500">— Amiga Corredora, Aluna ASK Presencial</div>
+                    </div>
+                    <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 space-y-4">
+                        <p class="text-neutral-300 italic text-sm">"Os treinadores são super humanos e atenciosos. Mesmo treinando pela planilha online, sinto um suporte completo e muito carinho com minha jornada de saúde."</p>
+                        <div class="text-xs font-bold text-orange-500">— Aluno Online, Preparação de Endurance</div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 text-center max-w-2xl mx-auto space-y-2">
+                    <h4 class="text-orange-500 font-bold text-sm uppercase">Destaques Reais dos Posts</h4>
+                    <p class="text-sm text-neutral-300">Presença unida dos nossos atletas na <strong>3ª Corrida do Servidor Público</strong> e ótimas marcas pessoais batidas no circuito <strong>100% Você - Teresina</strong>!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planos e Preços -->
+        <section id="pelo-planos" class="py-20 bg-neutral-950 border-t border-neutral-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12 space-y-2">
+                    <h2 class="text-3xl font-extrabold text-white">VALORES E OPÇÕES</h2>
+                    <p class="text-neutral-400 text-sm">Planos claros, sem complicação para você vestir a nossa camisa</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <!-- P1 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Planilha Online</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-4">R$ 119<span class="text-xs text-neutral-500 font-normal">/mês</span></div>
+                            <ul class="space-y-2 text-xs text-neutral-400">
+                                <li>• Prescrição pelo app oficial</li>
+                                <li>• Feedbacks de ajuste semanais</li>
+                                <li>• Dúvidas livres no WhatsApp</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Online%20ASK" class="mt-6 block text-center bg-neutral-800 hover:bg-neutral-700 text-white font-bold text-xs py-3 rounded-xl transition">Quero Treinar</a>
+                    </div>
+                    <!-- P2 Destaque Amigável -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border-2 border-orange-500 flex flex-col justify-between relative shadow-xl">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-orange-500 text-black font-extrabold text-[10px] px-3 py-0.5 rounded-full uppercase">Melhor Escolha</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Presencial Completo</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-4">R$ 169<span class="text-xs text-neutral-500 font-normal">/mês</span></div>
+                            <ul class="space-y-2 text-xs text-neutral-300">
+                                <li>• Planilhas online inclusas</li>
+                                <li>• Treinos de Pelotão semanais na Av. Marechal</li>
+                                <li>• Estrutura de hidratação acolhedora</li>
+                                <li>• Testes físicos recorrentes</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Presencial%20Completo%20ASK" class="mt-6 block text-center bg-orange-500 hover:bg-orange-600 text-black font-extrabold text-xs py-3 rounded-xl transition">Fazer Minha Inscrição 🎉</a>
+                    </div>
+                    <!-- P3 -->
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Elite VIP</h3>
+                            <div class="text-3xl font-black text-orange-500 mb-4">R$ 299<span class="text-xs text-neutral-500 font-normal">/mês</span></div>
+                            <ul class="space-y-2 text-xs text-neutral-400">
+                                <li>• Foco total ultra-individual</li>
+                                <li>• Suporte extra com musculação</li>
+                                <li>• Contato próximo prioritário</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5586999565861?text=Interesse%20no%20Plano%20Elite%20VIP%20ASK" class="mt-6 block text-center bg-neutral-800 hover:bg-neutral-700 text-white font-bold text-xs py-3 rounded-xl transition">Falar Conosco</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treinadores (Versão Pelotão/Acolhedora) -->
+        <section class="py-20 bg-neutral-900/30 border-t border-neutral-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white">NOSSOS PROFESSORES E AMIGOS</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 text-center space-y-3">
+                        <div class="w-24 h-24 bg-neutral-800 rounded-full mx-auto border-2 border-orange-500 flex items-center justify-center text-xs text-neutral-500 font-bold uppercase">Coach 1</div>
+                        <h3 class="text-lg font-bold text-white">Professor Líder</h3>
+                        <p class="text-zinc-400 text-xs">Sempre pronto com um sorriso e orientação para cada aluno do grupo.</p>
+                    </div>
+                    <div class="bg-neutral-900 p-6 rounded-2xl border border-neutral-800 text-center space-y-3">
+                        <div class="w-24 h-24 bg-neutral-800 rounded-full mx-auto border-2 border-orange-500 flex items-center justify-center text-xs text-neutral-500 font-bold uppercase">Coach 2</div>
+                        <h3 class="text-lg font-bold text-white">Professora de Endurance</h3>
+                        <p class="text-zinc-400 text-xs">Especialista em fazer você amar a corrida de rua de forma leve e saudável.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário Integrado -->
+        <section class="py-20 bg-neutral-950 border-t border-neutral-800">
+            <div class="max-w-md mx-auto px-4 text-center space-y-6">
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white">VEM PRO NOSSO PELOTÃO</h3>
+                    <p class="text-neutral-400 text-sm mt-1">Preencha e garanta sua conversa inicial</p>
+                </div>
+                <form onsubmit="event.preventDefault(); alert('Inscrição do pelotão enviada!');" class="space-y-3">
+                    <input type="text" placeholder="Seu Belo Nome" required class="w-full bg-neutral-900 border border-neutral-800 p-3 text-sm rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-orange-500">
+                    <input type="tel" placeholder="WhatsApp para contato" required class="w-full bg-neutral-900 border border-neutral-800 p-3 text-sm rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-orange-500">
+                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold text-sm py-3.5 rounded-xl transition">Quero Fazer Parte! 🎉</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-neutral-900 text-neutral-400 text-xs py-12 border-t border-neutral-800">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div>
+                    <div class="font-extrabold text-lg text-white mb-2">ASK ASSESSORIA</div>
+                    <p class="max-w-xs mx-auto md:mx-0">Sua corrida com muito mais ritmo, amizade e acompanhamento especializado em Teresina.</p>
+                </div>
+                <div>
+                    <h4 class="text-orange-500 font-bold uppercase tracking-wider mb-2">PONTO DE ENCONTRO</h4>
+                    <p class="text-neutral-300">📍 Av. Mar. Castelo Branco - Centro (Sul), Teresina - PI, 64000-590, Brasil</p>
+                </div>
+                <div>
+                    <h4 class="text-orange-500 font-bold uppercase tracking-wider mb-2">CONTATOS DIRETOS</h4>
+                    <p class="text-neutral-300">📞 (86) 99956-5861 | 📸 <a href="https://instagram.com/ask_assessoria" target="_blank" class="text-white hover:text-orange-500 font-bold">@ask_assessoria</a></p>
+                </div>
+            </div>
+            <div class="text-center border-t border-neutral-800 pt-6 text-neutral-600">
+                &copy; 2026 ASK Família Corredora. Criado com muita energia e acolhimento.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SIMPLE JAVASCRIPT FOR TOGGLING LAYOUTS -->
+    <script>
+        function switchLayout(variantName) {
+            // Hide all layouts
+            document.querySelectorAll('.layout-variant').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Show selected layout
+            document.getElementById('variant-' + variantName).classList.add('active');
+            
+            // Reset button styling
+            const buttons = ['performance', 'premium', 'pelotao'];
+            buttons.forEach(b => {
+                const btn = document.getElementById('btn-' + b);
+                if(b === variantName) {
+                    if(b === 'performance') {
+                        btn.className = "px-4 py-2 text-xs md:text-sm font-semibold rounded-lg transition-all duration-300 bg-orange-600 text-white shadow-lg shadow-orange-600/20";
+                    } else if(b === 'premium') {
+                        btn.className = "px-4 py-2 text-xs md:text-sm font-semibold rounded-lg transition-all duration-300 bg-zinc-800 text-orange-500 shadow-lg border border-zinc-700";
+                    } else {
+                        btn.className = "px-4 py-2 text-xs md:text-sm font-semibold rounded-lg transition-all duration-300 bg-neutral-800 text-orange-400 shadow-lg border border-neutral-700";
+                    }
+                } else {
+                    btn.className = "px-4 py-2 text-xs md:text-sm font-semibold text-zinc-400 hover:text-white rounded-lg transition-all duration-300";
+                }
+            });
+            
+            // Smooth scroll back to top of the preview area
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
